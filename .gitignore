@@ -9,3 +9,4 @@
 *.config
 *.pdb
 *.cache
+*AssemblyInfo.cs
