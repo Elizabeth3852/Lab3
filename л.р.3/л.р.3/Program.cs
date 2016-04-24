@@ -45,6 +45,55 @@ namespace л.р._3
         // исключения для классов наследников:
         protected Exception NonBellowZero = new Exception("Исключение, введенное значение не может быть отрицательным!");
         protected Exception OutOfMaxBorder = new Exception("Исключение, превышена максимальна граница!");
+
+        class Plane : Vehicle // класс самолет
+        {
+            private int height; // высота
+            private int passengers; // пассажиры
+            public int MaxPassengers { get; set; }
+            public Plane(int maxpassengers)
+            {
+                MaxPassengers = maxpassengers;
+            }
+            public override void SpeedDown()
+            {
+                CurrentSpeed -= 50;
+            }
+            public override void SpeedUp()
+            {
+                CurrentSpeed += 50;
+            }
+            public int GetCurrentPassengers()
+            {
+                return passengers;
+            }
+            public void SetCurrentPassengers(int n)
+            {
+                if (n > MaxPassengers)
+                {
+                    throw OutOfMaxBorder;
+                }
+                else if (n < 0)
+                {
+                    throw NonBellowZero;
+                }
+                passengers = n;
+            }
+            public int GetCurrentHeight()
+            {
+                return height;
+            }
+            public void SetCurrentHeight(int _height)
+            {
+                if (height < 0)
+                {
+                    throw NonBellowZero;
+                }
+                height = _height;
+            }
+            
+        }
+
     }
     class Program
     {
