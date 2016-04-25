@@ -22,7 +22,7 @@ namespace л.р._3
         public int Year // свойство года выпуска
         {
             get { return year; }
-            set { if (value > 1900 && value <= DateTime.Today.Year) year = value; }
+            set { if (value > 1000 && value <= DateTime.Today.Year) year = value; }
         }
         public int MaxSpeed // свойство максимальной скорости
         {
@@ -143,75 +143,62 @@ namespace л.р._3
     {
         static void Main(string[] args)
         {
-            // Plane
-            try
-            {
-                Plane P1 = new Plane(400) { MaxSpeed = 1000, Price = 2000000, Year = 2008 };
-                P1.SetCurrentPassengers(300);   // посадили 300 человек на рейс
-                P1.SetCurrentHeight(8000);      // взлетаем на высоту 8км
-                P1.CurrentSpeed = 700;           // разгоняемся до 800 км/час
-                Console.WriteLine(" \t\t\t САМОЛЕТ!!!!!!!! \t\t\t ");
-                Console.WriteLine("Характеристики самолета:");
-                Console.WriteLine("Год выпуска: {0}", P1.Year.ToString().PadLeft(15));
-                Console.WriteLine("Стоимость: {0} $", P1.Price.ToString().PadLeft(20));
-                Console.WriteLine("Высота полета: {0} км", P1.GetCurrentHeight().ToString().PadLeft(13));
-                Console.WriteLine("Посадочных мест: {0}", P1.MaxPassengers.ToString().PadLeft(10));
-                Console.WriteLine("Поссажиров на борту: {0}", P1.GetCurrentPassengers().ToString().PadLeft(6));
-                Console.WriteLine("Макс. скорость: {0} км/час", P1.MaxSpeed.ToString().PadLeft(12));
-                Console.WriteLine("Текущая скорость: {0} км/час", P1.CurrentSpeed.ToString().PadLeft(9));
-                Console.WriteLine("Ускоряемся ...");
-                P1.SpeedUp();
-                Console.WriteLine("Текущая скорость: {0} км/час", P1.CurrentSpeed.ToString().PadLeft(9));
-                Console.WriteLine("".PadLeft(19, '*'));
-                Console.WriteLine();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            // Ship
-            try
-            {
-                Ship S1 = new Ship(70) { MaxSpeed = 30, Price = 300000, Year = 2002 };
-                S1.SetCurrentPassengers(55);    // посадили 55 в корабль
-                S1.SetPort("Симферополь");      // порт назначения Симферополь
-                S1.CurrentSpeed = 20;           // скорость 20 узло
-                Console.WriteLine(" \t\t\t КОРАБЛЬ!!!!!!! \t\t\t ");
-                Console.WriteLine("Характеристики корабля");
-                Console.WriteLine("Год выпуска: {0}", S1.Year.ToString().PadLeft(16));
-                Console.WriteLine("Стоимость: {0} $", S1.Price.ToString().PadLeft(20));
-                Console.WriteLine("Порт приписки: {0}", S1.GetPort().ToString().PadLeft(21));
-                Console.WriteLine("Посадочных мест: {0}", S1.MaxPassengers.ToString().PadLeft(10));
-                Console.WriteLine("Поссажиров на борту: {0}", S1.GetCurrentPassengers().ToString().PadLeft(6));
-                Console.WriteLine("Макс. скорость: {0} узлов", S1.MaxSpeed.ToString().PadLeft(11));
-                Console.WriteLine("Текущая скорость: {0} узлов", S1.CurrentSpeed.ToString().PadLeft(9));
-                Console.WriteLine("Замедляемся ...");
-                S1.SpeedDown();
-                Console.WriteLine("Текущая скорость: {0} узлов", S1.CurrentSpeed.ToString().PadLeft(9));
-                Console.WriteLine("".PadLeft(19, '*'));
-                Console.WriteLine();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            bool flag = true;
             // Car
             try
             {
-                Car C1 = new Car() { Price = 30000, Year = 2006, MaxSpeed = 180 };
-                C1.CurrentSpeed = 170;          // машина едит на скорости 170 км/час
+                Car C = new Car();
+                C.Price = 0; C.Year = 0; C.MaxSpeed = 0; C.CurrentSpeed = 0;
                 Console.WriteLine(" \t\t\t МАШИНА!!!!!!!! \t\t\t ");
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите год выпуска: ");
+                        C.Year = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while(flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите стоимость: ");
+                        C.Price = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите максимальную скорость: ");
+                        C.MaxSpeed = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                Console.WriteLine("Введите текущую скорость: ");
+                C.CurrentSpeed = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Характеристики автомобиля:");
-                Console.WriteLine("Год выпуска: {0}", C1.Year.ToString().PadLeft(15));
-                Console.WriteLine("Стоимость: {0} $", C1.Price.ToString().PadLeft(18));
-                Console.WriteLine("Макс. скорость: {0} км/час", C1.MaxSpeed.ToString().PadLeft(11));
-                Console.WriteLine("Текущая скорость: {0} км/час", C1.CurrentSpeed.ToString().PadLeft(9));
+                Console.WriteLine("Год выпуска: {0}", C.Year.ToString().PadLeft(15));
+                Console.WriteLine("Стоимость: {0} $", C.Price.ToString().PadLeft(19));
+                Console.WriteLine("Макс. скорость: {0} км/час", C.MaxSpeed.ToString().PadLeft(11));
+                Console.WriteLine("Текущая скорость: {0} км/час", C.CurrentSpeed.ToString().PadLeft(9));
                 Console.WriteLine("Ускоряемся ...");
-                // так-как текущая скорость машины 170 км/час
-                // а метод SpeedUp() дает прирост скорости на 25 км/час
-                // что в сумме привысит максимальную скорость, и приведет к исключению
-                C1.SpeedUp();
-                Console.WriteLine("Текущая скорость: {0} узлов", C1.CurrentSpeed.ToString().PadLeft(9));
+                C.SpeedUp(); // а метод SpeedUp() дает прирост скорости, что в сумме привысит максимальную скорость, и приведет к исключению
+                Console.WriteLine("Текущая скорость: {0} км/час", C.CurrentSpeed.ToString().PadLeft(9));
                 Console.WriteLine("".PadLeft(18, '*'));
                 Console.WriteLine();
             }
@@ -219,6 +206,182 @@ namespace л.р._3
             {
                 Console.WriteLine(ex.Message);
             }
+
+            /*************************************************************************************************************************/
+            // Plane
+            try
+            {
+                Plane P = new Plane(400);
+                int h = 0;
+                P.MaxSpeed = 0; P.Price = 0; P.Year = 0; P.CurrentSpeed = 0;
+                P.SetCurrentPassengers(300);   // посадили 300 человек на рейс
+                P.SetCurrentHeight(h);
+                Console.WriteLine(" \t\t\t САМОЛЕТ!!!!!!!! \t\t\t ");
+                while(flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите год выпуска: ");
+                        P.Year = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите стоимость: ");
+                        P.Price = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите высоту полета: ");
+                        h = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите максимальную скорость: ");
+                        P.MaxSpeed = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while(flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите текущую скорость: ");
+                        P.CurrentSpeed = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                Console.WriteLine("Характеристики самолета:");
+                Console.WriteLine("Год выпуска: {0}", P.Year.ToString().PadLeft(15));
+                Console.WriteLine("Стоимость: {0} $", P.Price.ToString().PadLeft(18));
+                Console.WriteLine("Высота полета:" + h +" км", P.GetCurrentHeight().ToString().PadLeft(13));
+                Console.WriteLine("Посадочных мест: {0}", P.MaxPassengers.ToString().PadLeft(10));
+                Console.WriteLine("Поссажиров на борту: {0}", P.GetCurrentPassengers().ToString().PadLeft(6));
+                Console.WriteLine("Макс. скорость: {0} км/час", P.MaxSpeed.ToString().PadLeft(12));
+                Console.WriteLine("Текущая скорость: {0} км/час", P.CurrentSpeed.ToString().PadLeft(9));
+                Console.WriteLine("Ускоряемся ...");
+                P.SpeedUp();
+                Console.WriteLine("Текущая скорость: {0} км/час", P.CurrentSpeed.ToString().PadLeft(9));
+                Console.WriteLine("".PadLeft(19, '*'));
+                Console.WriteLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
+          /*************************************************************************************************************************/
+            // Ship
+            try
+            {
+                Ship S = new Ship(2000);
+                S.Year = 0; S.Price = 0; S.MaxPassengers = 0; S.MaxSpeed = 0; S.CurrentSpeed = 0;
+                S.SetCurrentPassengers(55);
+                S.SetPort("Одесса");      // порт назначения 
+                Console.WriteLine(" \t\t\t КОРАБЛЬ!!!!!!! \t\t\t ");
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите год выпуска: ");
+                        S.Year = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите стоимость: ");
+                        S.Price = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите максимальную скорость: ");
+                        S.MaxSpeed = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                while (flag)
+                {
+                    try
+                    {
+                        Console.WriteLine("Введите текущую скорость: ");
+                        S.CurrentSpeed = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат ввода");
+                    }
+                }
+                Console.WriteLine("Характеристики корабля");
+                Console.WriteLine("Год выпуска: {0}", S.Year.ToString().PadLeft(16));
+                Console.WriteLine("Стоимость: {0} $", S.Price.ToString().PadLeft(20));
+                Console.WriteLine("Порт приписки: {0}", S.GetPort().ToString().PadLeft(21));
+                Console.WriteLine("Посадочных мест: {0}", S.MaxPassengers.ToString().PadLeft(10));
+                Console.WriteLine("Поссажиров на борту: {0}", S.GetCurrentPassengers().ToString().PadLeft(6));
+                Console.WriteLine("Макс. скорость: {0} узлов", S.MaxSpeed.ToString().PadLeft(11));
+                Console.WriteLine("Текущая скорость: {0} узлов", S.CurrentSpeed.ToString().PadLeft(9));
+                Console.WriteLine("Замедляемся ...");
+                S.SpeedDown();
+                Console.WriteLine("Текущая скорость: {0} узлов", S.CurrentSpeed.ToString().PadLeft(9));
+                Console.WriteLine("".PadLeft(19, '*'));
+                Console.WriteLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            } 
+    
+            
             Console.ReadKey();
         }
     }
