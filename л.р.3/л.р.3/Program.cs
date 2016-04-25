@@ -206,7 +206,7 @@ namespace л.р._3
             {
                 Console.WriteLine(ex.Message);
             }
-
+            
             /*************************************************************************************************************************/
             // Plane
             try
@@ -306,9 +306,9 @@ namespace л.р._3
             try
             {
                 Ship S = new Ship(2000);
-                S.Year = 0; S.Price = 0; S.MaxPassengers = 0; S.MaxSpeed = 0; S.CurrentSpeed = 0;
+                S.Year = 0; S.Price = 0; S.MaxSpeed = 0; S.CurrentSpeed = 0;
                 S.SetCurrentPassengers(55);
-                S.SetPort("Одесса");      // порт назначения 
+                S.SetPort("Одесса"); // порт 
                 Console.WriteLine(" \t\t\t КОРАБЛЬ!!!!!!! \t\t\t ");
                 while (flag)
                 {
@@ -375,13 +375,12 @@ namespace л.р._3
                 Console.WriteLine("Текущая скорость: {0} узлов", S.CurrentSpeed.ToString().PadLeft(9));
                 Console.WriteLine("".PadLeft(19, '*'));
                 Console.WriteLine();
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            } 
-    
-            
+            }
             Console.ReadKey();
         }
     }
